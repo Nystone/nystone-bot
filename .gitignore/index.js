@@ -72,7 +72,7 @@ bot.on('ready', () => {
           })
           .catch(err => {
             console.log('Error Clear');
-            console.log(err);
+            console.log(error);
           });
       }
     }
