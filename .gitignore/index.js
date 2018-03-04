@@ -10,74 +10,12 @@ bot.on('ready', function () {
 })
 
 bot.on('message', message => {
-  if (message.content === 'n@ping-') {
-    message.reply('**Pong !**').then(msg => {msg.delete(5000)})
-    message.delete();
-  }
-});
-
-bot.on('message', message => {
-  if (message.content === 'n@invite') {
-    message.reply('Voici le discord: **https://discord.gg/8dcX5DU**').then(msg => {msg.delete(10000)})
-    message.delete();
-  }
-});
-
-bot.on('guildMemberAdd', member => {
-  member.createDM().then(channel => {
-    return channel.send('Bienvenue ' + member.displayName + 'sur ce serveur!')
-  }).catch(console.error)
-})
-
-bot.on('message', message => {
-  if (message.content === 'n@updateserver') {
-  	message.delete();
-  	bot.user.setGame('7 servers - 109 users')
-  }
-})
-
-bot.on('message', message => {
   if (message.content === 'n@help') {
   	message.delete();
     message.reply('Regardé vos messages privés!').then(msg => {msg.delete(5000)})
     message.author.sendMessage({embed})
   }
 })
-
-
-bot.on('ready', () => {
-  bot.on('message', message => {
-    if (message.content == 'n@clear') {
-
-
-      if (!message.channel.permissionsFor(message.author).hasPermission("MANAGE_MESSAGES")) {
-        message.channel.sendMessage("Vous n'avez pas la permissions d'executer cette commande: \""+message.content+"\"").then(msg => {msg.delete(5000)})
-        console.log("Sorry, you don't have the permission to execute the command \""+message.content+"\"");
-        return;
-      } else if (!message.channel.permissionsFor(bot.user).hasPermission("MANAGE_MESSAGES")) {
-        message.channel.sendMessage("Vous n'avez pas la permissions d'executer cette commande: \""+message.content+"\"").then(msg => {msg.delete(5000)})
-        console.log("Sorry, I don't have the permission to execute the command \""+message.content+"\"");
-        return;
-      }
-
-      if (message.channel.type == 'text') {
-        message.channel.fetchMessages()
-          .then(messages => {
-            message.channel.bulkDelete(messages);
-            messagesDeleted = messages.array().length; 
-
-            message.channel.sendMessage("Selection..").then(msg => {msg.delete(50)})
-            message.channel.sendMessage(":bomb: `"+messagesDeleted+"` Messages ont été supprimés.").then(msg => {msg.delete(3000)})
-            console.log(":bomb: `"+messagesDeleted+"` Messages ont été supprimés.")
-          })
-          .catch(err => {
-            console.log('Error Clear');
-            console.log(error);
-          });
-      }
-    }
-  });
-});
 
 const embed = new Discord.RichEmbed()
   .setTitle("vous pouvez retrouvé plus d'information en cliquant ici.")
